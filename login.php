@@ -1,5 +1,5 @@
 <?php
-//http://localhost/accountNote/login
+//http://localhost/accountNoteBackEnd/login
 require_once('config.php');
 class res {
     var $state = 0;

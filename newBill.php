@@ -1,5 +1,5 @@
 <?php
-//http://localhost/accountNote/newBill
+//http://localhost/accountNoteBackEnd/newBill
 require_once('config.php');
 class res {
     var $state = 0;

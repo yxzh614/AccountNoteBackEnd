@@ -1,5 +1,5 @@
 <?php
-//http://localhost/accountNoteBackEnd/newBudget
+//http://localhost/accountNoteBackEnd/changePassword
 require_once('config.php');
 class res {
     var $state = 0;
@@ -10,13 +10,13 @@ if(isset($GLOBALS['HTTP_RAW_POST_DATA'])) {
     
     //application/json 的请求头不会在$_POST返回值，要用全局原始数据
     $postData = json_decode($GLOBALS['HTTP_RAW_POST_DATA']);
-    $sqlCheck = "select count(type) from yusuanlist where username='".$postData->username."' and year=".$postData->year." and month=".$postData->month." and type = '".$postData->type."'";
+    $sqlCheck = "select password from user where username = '".$postData->username."'";
     if($resCheck = mysqli_query($db, $sqlCheck)) {
-        if(mysqli_fetch_assoc($resCheck)["count(type)"] == 1) {
+        if(mysqli_fetch_assoc($resCheck)["password"] !== $postData->old) {
         $answer->state = false;
-        $answer->error = '预算类别已存在！';
+        $answer->error = '旧密码错误！';
         } else {
-            $sql = "INSERT INTO `yusuanlist` (`ID`,`username`,`type`,`year`,`month`,`money`) VALUES (NULL, '".$postData->username."','".$postData->type."',".$postData->year.",".$postData->month.",".$postData->money.")";
+            $sql ="update user set password = '".$postData->new."' where username='".$postData->username."'";
             if($res = mysqli_query($db, $sql)) {
                 $answer->state = true;
                 $answer->error = '';

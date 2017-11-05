@@ -1,5 +1,5 @@
 <?php
-//http://localhost/accountNote/getBudgets
+//http://localhost/accountNoteBackEnd/getBudgets
 require_once('config.php');
 $answer = array();
 if(isset($GLOBALS['HTTP_RAW_POST_DATA'])) {
